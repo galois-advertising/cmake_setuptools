@@ -5,7 +5,7 @@ import sys
 from setuptools import Extension
 from setuptools.command.build_ext import build_ext
 
-CMAKE_EXE = os.environ.get('CMAKE_EXE', os.popen("which cmake").read())
+CMAKE_EXE = os.environ.get('CMAKE_EXE', os.popen("which cmake").read().strip("\n"))
 
 
 def check_for_cmake():
@@ -51,13 +51,13 @@ class CMakeBuildExt(build_ext):
             env = os.environ.copy()
             if not os.path.exists(self.build_temp):
                 os.makedirs(self.build_temp)
+            print(" ".join(cmake_args))
             subprocess.check_call(cmake_args,
                                   cwd=self.build_temp,
                                   env=env)
             subprocess.check_call(['make', '-j', ext.name],
                                   cwd=self.build_temp,
                                   env=env)
-            print()
         else:
             super().build_extension(ext)
 
