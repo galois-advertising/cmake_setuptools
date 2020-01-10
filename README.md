@@ -4,13 +4,13 @@ A small library of `setuptools` extensions to ease building python packages whic
 
 ## Install
 
-`pip install cmake_setuptools`
+`pip install cmake_setup`
 
 ## Usage
 
 ```python
 from setuptools import setup
-from cmake_setuptools import *
+from cmake_setup import *
 
 setup(name='mypackage',
       description='',
@@ -18,4 +18,11 @@ setup(name='mypackage',
       ext_modules=[CMakeExtension('make_target')],
       cmdclass={'build_ext': CMakeBuildExt}
       )
+```
+
+## upload
+
+```
+$ python setup.py sdist bdist_wheel
+$ python -m twine upload dist/*
 ```
