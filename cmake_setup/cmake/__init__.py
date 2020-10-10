@@ -4,8 +4,9 @@ import shutil
 import sys
 from setuptools import Extension
 from setuptools.command.build_ext import build_ext
+from distutils.spawn import find_executable
 
-CMAKE_EXE = os.environ.get('CMAKE_EXE', os.popen("which cmake").read().strip("\n"))
+CMAKE_EXE = os.environ.get('CMAKE_EXE', find_executable('cmake'))
 
 
 def check_for_cmake():
